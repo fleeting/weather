@@ -3,10 +3,12 @@ import tingbot
 from tingbot import screen
 from tingbot.graphics import Image
 import requests
+import time
+import datetime
 
 options = {
-    'location': 'London, UK',
-    'unit': 'c'
+    'location': 'Boston, MA',
+    'unit': 'f'
 }
 
 data = {
@@ -36,7 +38,7 @@ def refresh_data():
     item = channel['item']
     condition = item['condition']
     data['location'] = channel['location']['city']
-    data['temp'] = condition['temp']
+    data['temp'] = condition['temp'] + u'\u00b0'
     data['description'] = condition['text']
 
     code = int(condition['code'])
@@ -74,7 +76,7 @@ def loop():
         font_size=22,
     )
     screen.text (
-        'Now',
+        '%s:%s' % (time.localtime().tm_hour, time.localtime().tm_min),
         xy=(300,213),
         align='right',
         font='HelveticaNeue.ttf',
