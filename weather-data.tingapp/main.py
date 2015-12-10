@@ -4,7 +4,6 @@ from tingbot import screen
 from tingbot.graphics import Image
 import requests
 import time
-import datetime
 
 options = {
     'location': 'Boston, MA',
