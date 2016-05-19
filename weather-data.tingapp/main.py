@@ -4,18 +4,24 @@ from tingbot import screen
 from tingbot.graphics import Image
 import requests
 import time
+import pprint
 
+# datetime formats >> https://docs.python.org/2/library/datetime.html#strftime-and-strptime-behavior
 options = {
     'location': 'Boston, MA',
-    'unit': 'f'
+    'unit': 'f',
+    'date_format': '%d %B',
+    'time_format': '%I:%M %p'
 }
 
 data = {
     'location': '',
-    'temp': 0,
-    'description': 'Refreshing...',
+    'temp': '',
+    'description': 'Loading data...',
     'when': '',
     'background_image': None,
+    'current_time': '',
+    'current_date': ''
 }
 
 @tingbot.every(minutes=10)
@@ -30,7 +36,6 @@ def refresh_data():
     r.raise_for_status()
 
     api_data = r.json()
-    import pprint
     pprint.pprint(api_data)
 
     channel = api_data['query']['results']['channel']
@@ -43,6 +48,9 @@ def refresh_data():
     code = int(condition['code'])
     gif_name = code_to_gif_map[code]
     data['background_image'] = Image.load(gif_name)
+    
+    data['current_date'] = time.strftime(options['date_format'])
+    data['current_time'] = time.strftime(options['time_format']).lower()
 
 def loop():
     if data['background_image']:
@@ -75,7 +83,15 @@ def loop():
         font_size=22,
     )
     screen.text (
-        '%s:%s' % (time.localtime().tm_hour, time.localtime().tm_min),
+        data['current_date'],
+        xy=(300,190),
+        align='right',
+        font='HelveticaNeue.ttf',
+        font_size=22,
+        color='white',
+    )
+    screen.text (
+        data['current_time'],
         xy=(300,213),
         align='right',
         font='HelveticaNeue.ttf',
