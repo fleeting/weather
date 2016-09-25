@@ -2,7 +2,7 @@
 
 <img width="536" alt="tingbot-weather-example" src="https://cloud.githubusercontent.com/assets/23062/11510727/3043417a-9833-11e5-8d7e-9d00f134cce3.png">
 
-> A weather app for [Tingbot](http://tingbot.com). You have the ability to control which weather data shows from a variety of options. Handcrafted with ♥ from Boston, MA by [James Fleeting](http://twitter.com/fleetingftw).
+> A weather app for [Tingbot](http://tingbot.com). You have the ability to control which weather data shows from a variety of options. Handcrafted with ♥ from Austin, TX by [James Fleeting](http://twitter.com/fleetingftw).
 
 ## Usage
 
